@@ -1,0 +1,17 @@
+<div class="location-grid" fxLayout="row wrap" fxLayoutGap="16px">
+  <mat-card *ngFor="let loc of locations" class="location-card">
+    <mat-card-header>
+      <mat-card-title>{{ loc.name }}</mat-card-title>
+      <mat-card-subtitle>Status: {{ loc.status}}</mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-card-content>
+      <p><strong>Type:</strong> {{ loc.type }}</p>
+      <p><strong>Operational Status:</strong> {{ loc.operationalStatus }}</p>
+      <p><strong>Address:</strong> {{ loc.address }}</p>
+      <p><strong>Contact:</strong> {{ loc.contactName }} ({{ loc.contactPhone }})</p>
+      <p><strong>Coordinates:</strong> {{ loc.coordinates }}</p>
+      <p><strong>Last Updated:</strong> {{ loc.lastUpdated | date: 'medium'}}</p>
+    </mat-card-content>
+  </mat-card>
+</div>

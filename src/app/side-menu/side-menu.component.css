@@ -1,0 +1,25 @@
+.sidenav-container {
+  height: 100vh;
+  /* display: flex; */
+  border-right: 3px double red;
+}
+
+.sidenav {
+  width: 250px;
+}
+
+.content {
+  flex-grow: 1;
+  padding: 16px;
+}
+
+.active {
+  background-color: #1976d2;
+  color: white;
+}
+
+.mat-toolbar {
+  text-align: center;
+  font-size: 18px;
+  font-weight: bold;
+}

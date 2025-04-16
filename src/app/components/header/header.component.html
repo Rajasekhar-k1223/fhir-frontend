@@ -1,0 +1,83 @@
+<mat-toolbar color="primary" class="app-header"  *ngIf="isLoggedIn">
+  <span class="logo">MyApp</span>
+
+  <span class="spacer"></span>
+
+  <!-- Navigation Menu -->
+  <button
+    mat-button
+    routerLink="/patient"
+    [class.active-link]="activeRoute === 'patient'"
+  >
+    Patients
+  </button>
+  <button
+    mat-button
+    routerLink="/practitioner"
+    [class.active-link]="activeRoute === 'practitioner'"
+  >
+    Practitioners
+  </button>
+  <button
+    mat-button
+    routerLink="/careteam"
+    [class.active-link]="activeRoute === 'careteam'"
+  >
+    CareTeam
+  </button>
+  <button
+    mat-button
+    routerLink="/device"
+    [class.active-link]="activeRoute === 'device'"
+  >
+    Device
+  </button>
+  <button
+    mat-button
+    routerLink="/organization"
+    [class.active-link]="activeRoute === 'organization'"
+  >
+    Organization
+  </button>
+  <button
+    mat-button
+    routerLink="/location"
+    [class.active-link]="activeRoute === 'location'"
+  >
+    Location
+  </button>
+  <button
+    mat-button
+    routerLink="/healthcare-service"
+    [class.active-link]="activeRoute === 'healthcare-service'"
+  >
+    Healthcare Service
+  </button>
+  <button
+    mat-button
+    routerLink="/geomaps"
+    [class.active-link]="activeRoute === 'geomaps'"
+  >
+   GeoMaps
+  </button>
+
+  <span class="spacer"></span>
+
+  <!-- User Menu -->
+  <ng-container *ngIf="isLoggedIn">
+    <button mat-icon-button [matMenuTriggerFor]="userMenu">
+      <mat-icon>account_circle</mat-icon>
+    </button>
+    <mat-menu #userMenu="matMenu">
+      <button mat-menu-item disabled>Welcome, {{ userName }}</button>
+      <button mat-menu-item (click)="toggleLogin()">
+        <mat-icon>logout</mat-icon> Logout
+      </button>
+    </mat-menu>
+  </ng-container>
+</mat-toolbar>
+<mat-toolbar color="primary" class="app-header" *ngIf="!isLoggedIn" >
+<button mat-raised-button color="accent" class="login-btn" (click)="toggleLogin()">Login</button>
+</mat-toolbar>
+
+

@@ -1,0 +1,29 @@
+.container {
+  display: flex;
+  height: 100vh;
+  max-width: 100% !important;
+}
+
+app-side-menu {
+  flex: 0 0 200px; /* Fixed width for sidebar */
+}
+
+.practitioner-details {
+  flex-grow: 1;
+  padding: 20px;
+}
+
+.page-content {
+  padding: 0px !important;
+}
+
+.sidenav-container {
+  display: flex;
+  height: 100vh;
+}
+
+.sidenav {
+  width: 230px;
+  background-color: #f5f5f5;
+  /* padding: 10px; */
+}

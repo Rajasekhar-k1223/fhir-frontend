@@ -1,0 +1,27 @@
+<mat-sidenav-container class="sidenav-container">
+  <!-- Side Menu -->
+  <mat-sidenav mode="side" opened class="sidenav">
+    <app-side-menu [practitionerId]="practitionerId"></app-side-menu>
+  </mat-sidenav>
+
+  <!-- Main Content -->
+  <div class="practitioner-details">
+    <h2>Practitioner Details</h2>
+
+    <!-- Loading State -->
+    <div *ngIf="loading">Loading practitioner details...</div>
+
+    <!-- Error Message -->
+    <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+
+    <!-- Practitioner Info -->
+    <div *ngIf="!loading && !errorMessage && practitionerDetails">
+      <p><strong>Full Name:</strong> {{ practitionerDetails.fullName }}</p>
+      <p><strong>Identifier:</strong> {{ practitionerDetails.identifier }}</p>
+      <p><strong>Qualification:</strong> {{ practitionerDetails.qualification }}</p>
+      <p><strong>Last Updated:</strong> {{ practitionerDetails.lastUpdated }}</p>
+    </div>
+
+    <button mat-raised-button color="primary" (click)="goToPractitionerList()">Back to Practitioner List</button>
+  </div>
+</mat-sidenav-container>

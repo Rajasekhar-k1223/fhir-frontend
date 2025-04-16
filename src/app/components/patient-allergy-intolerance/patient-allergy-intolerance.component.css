@@ -1,0 +1,65 @@
+.container {
+  max-width: 800px;
+  margin: auto;
+  padding: 20px;
+}
+
+.card {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 15px;
+  margin-bottom: 15px;
+  background-color: #f9f9f9;
+}
+
+h2 {
+  text-align: center;
+}
+.sidenav-container {
+  display: flex;
+  height: 100vh;
+}
+
+.sidenav {
+  width: 230px;
+  background-color: #f5f5f5;
+  /* padding: 10px; */
+}
+
+.content {
+  flex-grow: 1;
+  padding: 20px;
+}
+
+.encounter-card {
+  margin-bottom: 15px;
+  padding: 15px;
+}
+
+.no-encounters {
+  text-align: center;
+  font-weight: bold;
+  padding: 20px;
+}
+
+.expanded-row {
+  background: #f9f9f9;
+}
+.expanded-content {
+  padding: 12px;
+  font-size: 14px;
+}
+.mat-table {
+  width: 100%;
+}
+.main-row {
+  cursor: pointer;
+}
+
+.detail-row {
+  background: #f5f5f5;
+}
+
+.expanded-content {
+  padding: 16px;
+}

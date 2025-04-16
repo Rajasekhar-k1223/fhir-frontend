@@ -1,0 +1,173 @@
+/* Container */
+.container {
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Top Controls - Search and Items per Page */
+.top-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.search-bar {
+  width: 30%;
+  min-width: 200px;
+}
+
+.items-per-page {
+  min-width: 160px;
+}
+
+/* Practitioner Card */
+.practitioner-card {
+  /* max-width: 1200px;
+  margin: 20px auto;
+  padding: 15px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  min-height: 80vh; */
+  width: 100%;
+  padding: 15px;
+  border-radius: 8px;
+  transition: transform 0.2s ease-in-out, border 0.2s ease-in-out;
+}
+.practitioner-card:hover {
+  transform: scale(1.05);
+}
+/* Practitioner List */
+.grid-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.grid-tile {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.practitioner-item {
+  width: 100%;
+  padding: 15px;
+  border-radius: 8px;
+  transition: transform 0.2s ease-in-out, border 0.2s ease-in-out;
+}
+
+/* Hover Effect */
+.practitioner-item:hover {
+  transform: scale(1.05);
+}
+
+/* Border colors */
+/* .active-border {
+  border: 2px solid green !important;
+}
+
+.inactive-border {
+  border: 2px solid red !important;
+} */
+
+/* Ensure border visibility */
+.practitioner-item mat-card-header,
+.practitioner-item mat-card-content {
+  border-top: 3px solid inherit;
+  border-bottom: 3px solid inherit;
+}
+
+/* Practitioner Title */
+mat-card-title {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+/* Practitioner Content */
+mat-card-content p {
+  font-size: 14px;
+  margin: 5px 0;
+}
+
+.active-status {
+  color: green;
+  font-weight: bold;
+}
+
+.inactive-status {
+  color: red;
+  font-weight: bold;
+}
+
+/* Pagination Controls */
+.pagination-controls {
+  display: flex;
+  justify-content: right;
+  align-items: right;
+  gap: 5px;
+  margin-top: 20px;
+  padding: 10px;
+}
+
+.pagination-btn {
+  display: flex;
+  align-items: end;
+  gap: 0px;
+  font-size: 16px;
+  font-weight: 500;
+  padding: 5px 10px;
+  border-radius: 25px;
+  transition: all 0.3s ease-in-out;
+}
+
+/* Add subtle hover effect */
+.pagination-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Disabled button styling */
+.pagination-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+/* Styling for pagination text */
+.page-info {
+  font-size: 16px;
+  font-weight: bold;
+  color: #333;
+}
+
+/* Animation when clicking */
+.pagination-btn:active {
+  transform: scale(0.95);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .top-controls {
+    flex-direction: column;
+    align-items: end;
+    gap: 10px;
+  }
+
+  .search-bar, .items-per-page {
+    width: 100%;
+  }
+
+  .grid-list {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .grid-tile {
+    max-width: 100%;
+  }
+}

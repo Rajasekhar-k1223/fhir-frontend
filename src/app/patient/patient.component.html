@@ -1,0 +1,55 @@
+<div class="container">
+  <!-- Search and Pagination Controls -->
+  <div class="top-controls">
+    <mat-form-field class="search-bar" appearance="outline">
+      <mat-label>Search Patient</mat-label>
+      <input matInput [(ngModel)]="searchQuery" (input)="filterPatients()" placeholder="Enter Name or ID">
+      <mat-icon matSuffix>search</mat-icon>
+    </mat-form-field>
+
+    <mat-form-field class="items-per-page" appearance="outline">
+      <mat-label>Items per page</mat-label>
+      <mat-select [(ngModel)]="pageSize" (selectionChange)="updatePagination()">
+        <mat-option *ngFor="let size of [5, 10, 15, 20]" [value]="size">{{ size }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <!-- Patient List -->
+  <mat-grid-list [cols]="gridCols" rowHeight="170px" gutterSize="10px" class="grid-list">
+    <mat-grid-tile *ngFor="let patient of paginatedPatients" class="grid-tile">
+      <mat-card class="patient-card"
+      (click)="viewPatientDetails(patient.patientId)"
+                [ngClass]="{ 'active-border': patient.status === 'Active', 'inactive-border': patient.status === 'Inactive' }">
+        <mat-card-header>
+          <div mat-card-avatar class="profile-pic" *ngIf="patient.photo">
+            <img [src]="patient.photo" alt="Profile Photo" />
+          </div>
+          <mat-card-title>{{ patient.fullName }}</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <!-- <p><strong>ID:</strong> {{ patient.patientId }}</p> -->
+          <p><strong>MRN:</strong> {{ patient.mrn }}</p>
+          <p><strong>Last Update:</strong> {{ patient.lastUpdate }}</p>
+          <p><strong>Status:</strong>
+            <span class="status" [ngClass]="{ 'active-status': patient.status, 'inactive-status': !patient.status }">
+              {{ patient.status ? 'Active' : 'Inactive' }}
+            </span>
+          </p>
+        </mat-card-content>
+      </mat-card>
+    </mat-grid-tile>
+  </mat-grid-list>
+
+  <!-- Pagination Controls -->
+  <div class="pagination-controls">
+    <button mat-raised-button color="accent" class="pagination-btn prev" (click)="prevPage()" [disabled]="currentPage === 0">
+      <mat-icon>chevron_left</mat-icon> Previous
+    </button>
+    <span class="page-info"> Page {{ currentPage + 1 }} of {{ totalPages }} </span>
+    <button mat-raised-button color="accent" class="pagination-btn next" (click)="nextPage()" [disabled]="currentPage >= totalPages - 1">
+      Next <mat-icon>chevron_right</mat-icon>
+    </button>
+  </div>
+
+</div>

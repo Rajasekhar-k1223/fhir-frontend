@@ -1,0 +1,118 @@
+<mat-sidenav-container class="sidenav-container">
+  <!-- Sidebar Navigation -->
+  <mat-sidenav mode="side" opened class="sidenav">
+    <app-side-menu [patientId]="patientId"></app-side-menu>
+  </mat-sidenav>
+
+  <mat-sidenav-content class="main-content p-4">
+    <h2 class="mb-4">Observation Details</h2>
+
+    <div class="table-container">
+      <table mat-table [dataSource]="patientObservations" multiTemplateDataRows class="mat-elevation-z8 w-100">
+
+        <!-- ID -->
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef> ID </th>
+          <td mat-cell *matCellDef="let obs"> {{ obs?.id }} </td>
+        </ng-container>
+
+        <!-- Status -->
+        <ng-container matColumnDef="status">
+          <th mat-header-cell *matHeaderCellDef> Status </th>
+          <td mat-cell *matCellDef="let obs"> {{ obs?.status }} </td>
+        </ng-container>
+
+        <!-- Category -->
+        <ng-container matColumnDef="category">
+          <th mat-header-cell *matHeaderCellDef> Category </th>
+          <td mat-cell *matCellDef="let obs"> {{ obs?.category?.[0]?.coding?.[0]?.display }} </td>
+        </ng-container>
+
+        <!-- Code -->
+        <ng-container matColumnDef="code">
+          <th mat-header-cell *matHeaderCellDef> Code </th>
+          <td mat-cell *matCellDef="let obs"> {{ obs?.code?.coding?.[0]?.display }} </td>
+        </ng-container>
+
+        <!-- Effective Date -->
+        <ng-container matColumnDef="effectiveDate">
+          <th mat-header-cell *matHeaderCellDef> Effective Date </th>
+          <td mat-cell *matCellDef="let obs"> {{ obs?.effectiveDateTime | date: 'medium' }} </td>
+        </ng-container>
+
+        <!-- Issued -->
+        <ng-container matColumnDef="issued">
+          <th mat-header-cell *matHeaderCellDef> Issued </th>
+          <td mat-cell *matCellDef="let obs"> {{ obs?.issued | date: 'medium' }} </td>
+        </ng-container>
+
+        <!-- Value -->
+        <ng-container matColumnDef="value">
+          <th mat-header-cell *matHeaderCellDef> Value </th>
+          <td mat-cell *matCellDef="let obs"> {{ obs?.valueQuantity?.value }} {{ obs?.valueQuantity?.unit }} </td>
+        </ng-container>
+
+        <!-- Interpretation -->
+        <ng-container matColumnDef="interpretation">
+          <th mat-header-cell *matHeaderCellDef> Interpretation </th>
+          <td mat-cell *matCellDef="let obs"> {{ obs?.interpretation?.[0]?.coding?.[0]?.display }} </td>
+        </ng-container>
+
+        <!-- Reference Range -->
+        <ng-container matColumnDef="reference">
+          <th mat-header-cell *matHeaderCellDef> Reference Range </th>
+          <td mat-cell *matCellDef="let obs">
+            {{ obs?.referenceRange?.[0]?.low?.value }} - {{ obs?.referenceRange?.[0]?.high?.value }}
+            {{ obs?.referenceRange?.[0]?.high?.unit }}
+          </td>
+        </ng-container>
+
+        <!-- Expand Toggle -->
+        <ng-container matColumnDef="expand">
+          <th mat-header-cell *matHeaderCellDef></th>
+          <td mat-cell *matCellDef="let obs">
+            <button mat-icon-button (click)="toggleRow(obs)">
+              <mat-icon>{{ expandedElement === obs ? 'expand_less' : 'expand_more' }}</mat-icon>
+            </button>
+          </td>
+        </ng-container>
+
+        <!-- Table Row Definitions -->
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let obs; columns: displayedColumns"></tr>
+      </table>
+
+      <!-- Expanded Row Outside Table with obs Context -->
+      <ng-container *ngFor="let obs of patientObservations">
+        <tr *ngIf="expandedElement === obs" class="expanded-row mat-row">
+          <td [attr.colspan]="displayedColumns.length">
+            <div class="p-3">
+              <h4>Component Observations</h4>
+
+              <div *ngIf="!obs?.component?.length">
+                <em>No component data available.</em>
+              </div>
+
+              <div *ngIf="obs?.component?.length">
+                <table class="table table-bordered w-100 mb-3">
+                  <thead>
+                    <tr>
+                      <th>Code</th>
+                      <th>Value</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let comp of obs.component">
+                      <td>{{ comp?.code?.coding?.[0]?.display }}</td>
+                      <td>{{ comp?.valueQuantity?.value }} {{ comp?.valueQuantity?.unit }}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </td>
+        </tr>
+      </ng-container>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

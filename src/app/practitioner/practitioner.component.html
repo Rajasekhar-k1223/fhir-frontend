@@ -1,0 +1,56 @@
+<div class="container">
+  <!-- Search and Pagination Controls -->
+  <div class="top-controls">
+    <mat-form-field class="search-bar" appearance="outline">
+      <mat-label>Search Practitioner</mat-label>
+      <input matInput [(ngModel)]="searchQuery" (input)="filterPractitioners()" placeholder="Enter ID or Identifier">
+      <mat-icon matSuffix>search</mat-icon>
+    </mat-form-field>
+
+    <mat-form-field class="items-per-page" appearance="outline">
+      <mat-label>Items per page</mat-label>
+      <mat-select [(ngModel)]="pageSize" (selectionChange)="updatePagination()">
+        <mat-option *ngFor="let size of [5, 10, 15, 20]" [value]="size">{{ size }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <!-- Practitioner List -->
+  <mat-grid-list cols="3" rowHeight="170px" gutterSize="10px" class="grid-list">
+    <mat-grid-tile *ngFor="let practitioner of paginatedPractitioners" class="grid-tile">
+      <mat-card class="practitioner-card"
+        (click)="viewPractitionerDetails(practitioner.practitionerId)"
+        [ngClass]="{ 'active-border': practitioner.active?.value, 'inactive-border': !practitioner.active?.value }">
+
+        <mat-card-header>
+          <div mat-card-avatar class="profile-pic" *ngIf="practitioner.photo">
+            <img [src]="practitioner.photo" alt="Profile Photo" />
+          </div>
+          <mat-card-title>{{ practitioner.fullName || 'N/A' }}</mat-card-title>
+        </mat-card-header>
+
+        <mat-card-content>
+          <p><strong>Official ID:</strong> {{ practitioner.licenseNumber|| 'N/A' }}</p>
+          <!-- <p><strong>Version:</strong> {{ practitioner.meta?.versionId?.value || 'N/A' }}</p> -->
+          <p><strong>Last Updated:</strong> {{ practitioner.meta?.lastUpdated?.value | date:'medium' }}</p>
+          <p><strong>Status:</strong>
+            <span class="status" [ngClass]="{ 'active-status': practitioner.status, 'inactive-status': !practitioner.status }">
+              {{ practitioner.status ? 'Active' : 'Inactive' }}
+            </span>
+          </p>
+        </mat-card-content>
+      </mat-card>
+    </mat-grid-tile>
+  </mat-grid-list>
+
+  <!-- Pagination Controls -->
+  <div class="pagination-controls">
+    <button mat-raised-button color="accent" class="pagination-btn prev" (click)="prevPage()" [disabled]="currentPage === 0">
+      <mat-icon>chevron_left</mat-icon> Previous
+    </button>
+    <span class="page-info"> Page {{ currentPage + 1 }} of {{ totalPages }} </span>
+    <button mat-raised-button color="accent" class="pagination-btn next" (click)="nextPage()" [disabled]="currentPage >= totalPages - 1">
+      Next <mat-icon>chevron_right</mat-icon>
+    </button>
+  </div>
+</div>

@@ -1,1 +1,24 @@
 /* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+.app-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000; /* Keep header on top */
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Add shadow for better visibility */
+}
+
+/* Ensure the content does not go under the header */
+.page-content {
+  margin-top: 70px; /* Adjust based on your toolbar height */
+  min-height: calc(100vh - 70px); /* Ensure it takes the full remaining height */
+  box-sizing: border-box;
+}
+mat-cell.long-text {
+  white-space: normal;
+  word-wrap: break-word;
+  max-width: 500px;
+}

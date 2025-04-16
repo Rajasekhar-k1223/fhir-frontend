@@ -1,0 +1,8 @@
+<div *ngIf="patient">
+    <h2>Patient Details</h2>
+    <p><strong>ID:</strong> {{ patient.id }}</p>
+    <p><strong>Name:</strong> {{ patient.name[0].given[0] }} {{ patient.name[0].family }}</p>
+    <p><strong>Gender:</strong> {{ patient.gender }}</p>
+    <p><strong>Birth Date:</strong> {{ patient.birthDate }}</p>
+  </div>
+  

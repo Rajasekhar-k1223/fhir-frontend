@@ -1,0 +1,129 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav mode="side" opened class="sidenav">
+    <app-side-menu [patientId]="patientId"></app-side-menu>
+  </mat-sidenav>
+
+  <mat-sidenav-content class="content-container p-4">
+    <h2>Allergy Intolerances</h2>
+
+    <ng-container *ngIf="patientAllergyIntolerance?.length > 0; else noAllergies">
+      <table mat-table [dataSource]="patientAllergyIntolerance" multiTemplateDataRows class="mat-elevation-z8">
+
+        <!-- Columns -->
+        <ng-container matColumnDef="code">
+          <th mat-header-cell *matHeaderCellDef>Allergy</th>
+          <td mat-cell *matCellDef="let element">{{ element.code?.text }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="type">
+          <th mat-header-cell *matHeaderCellDef>Type</th>
+          <td mat-cell *matCellDef="let element">{{ element.type?.text }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="category">
+          <th mat-header-cell *matHeaderCellDef>Category</th>
+          <td mat-cell *matCellDef="let element">{{ element.category?.join(', ') }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="clinicalStatus">
+          <th mat-header-cell *matHeaderCellDef>Clinical Status</th>
+          <td mat-cell *matCellDef="let element">{{ element.clinicalStatus?.text }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="recordedDate">
+          <th mat-header-cell *matHeaderCellDef>Recorded</th>
+          <td mat-cell *matCellDef="let element">{{ element.recordedDate | date:'short' }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="criticality">
+          <th mat-header-cell *matHeaderCellDef>Criticality</th>
+          <td mat-cell *matCellDef="let element">{{ element.criticality }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="verificationStatus">
+          <th mat-header-cell *matHeaderCellDef>Verification</th>
+          <td mat-cell *matCellDef="let element">{{ element.verificationStatus?.text }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="lastOccurrence">
+          <th mat-header-cell *matHeaderCellDef>Last Occurrence</th>
+          <td mat-cell *matCellDef="let element">{{ element.lastOccurrence | date:'short' }}</td>
+        </ng-container>
+
+        <!-- Expand Icon -->
+        <ng-container matColumnDef="expand">
+          <th mat-header-cell *matHeaderCellDef></th>
+          <td mat-cell *matCellDef="let element">
+            <button mat-icon-button (click)="toggleRow(element)">
+              <mat-icon>{{ expandedElement === element ? 'expand_less' : 'expand_more' }}</mat-icon>
+            </button>
+          </td>
+        </ng-container>
+
+        <!-- Main Row -->
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+        <!-- Expanded Detail Row -->
+        <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="detail-row"
+            [class.expanded]="expandedElement === row">
+          <td [attr.colspan]="displayedColumns.length">
+            <div *ngIf="expandedElement === row" class="expanded-content">
+
+              <h4>Meta Information</h4>
+              <ul>
+                <li><strong>Version ID:</strong> {{ row.meta?.versionId?.value }}</li>
+                <li><strong>Last Updated:</strong> {{ row.meta?.lastUpdated?.value }}</li>
+                <li><strong>Source:</strong> {{ row.meta?.source?.value }}</li>
+              </ul>
+
+              <h4>Subject</h4>
+              <p>{{ row.subject?.reference?.value }}</p>
+
+              <h4>Reactions</h4>
+              <ul *ngFor="let react of row.reaction">
+                <li>
+                  <strong>Substance:</strong> {{ react.substance?.text }}<br />
+                  <strong>Manifestation:</strong> {{ getManifestationText(react.manifestation) }}<br />
+                  <strong>Description:</strong> {{ react.description }}<br />
+                  <strong>Onset:</strong> {{ react.onset | date:'short' }}<br />
+                  <strong>Severity:</strong> {{ react.severity }}<br />
+                  <strong>Route:</strong> {{ react.exposureRoute?.text }}<br />
+                  <strong>Note:</strong> {{ react.note?.[0]?.text }}
+                </li>
+              </ul>
+
+              <h4>Participant</h4>
+              <ul *ngFor="let p of row.participant">
+                <li>{{ p.function?.text }} - {{ p.actor?.reference }}</li>
+              </ul>
+
+              <h4>Notes</h4>
+              <ul *ngFor="let note of row.note">
+                <li>{{ note.text }} ({{ note.authorString }}, {{ note.time | date:'short' }})</li>
+              </ul>
+
+              <h4>Location(s)</h4>
+              <ul *ngFor="let loc of row.location">
+                <li>
+                  {{ loc.location?.display?.value || loc.location?.reference?.value }} - {{ loc.status?.value }}
+                  ({{ loc.period?.start?.value }} to {{ loc.period?.end?.value || 'Present' }})
+                </li>
+              </ul>
+            </div>
+          </td>
+        </tr>
+
+        <!-- Dummy column for expandedDetail -->
+        <ng-container matColumnDef="expandedDetail">
+          <td mat-cell *matCellDef="let element"></td>
+        </ng-container>
+
+      </table>
+    </ng-container>
+
+    <ng-template #noAllergies>
+      <p>No allergies found for this patient.</p>
+    </ng-template>
+  </mat-sidenav-content>
+</mat-sidenav-container>

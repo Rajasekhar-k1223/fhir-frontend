@@ -1,0 +1,93 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav mode="side" opened class="sidenav">
+    <app-side-menu [patientId]="patientId"></app-side-menu>
+  </mat-sidenav>
+
+  <mat-sidenav-content class="main-content p-4">
+    <h2 class="mb-4">Patient Conditions</h2>
+
+    <div *ngIf="patientConditions?.length > 0; else noData">
+      <mat-card class="mat-elevation-z2">
+        <mat-card-content>
+          <table mat-table [dataSource]="patientConditions" class="mat-elevation-z1 full-width-table">
+
+            <!-- ID Column -->
+            <ng-container matColumnDef="id">
+              <th mat-header-cell *matHeaderCellDef>ID</th>
+              <td mat-cell *matCellDef="let cond">{{ cond.id || 'N/A' }}</td>
+            </ng-container>
+
+            <!-- Code Text -->
+            <ng-container matColumnDef="code">
+              <th mat-header-cell *matHeaderCellDef>Condition</th>
+              <td mat-cell *matCellDef="let cond">{{ cond.code?.text || 'N/A' }}</td>
+            </ng-container>
+
+            <!-- Recorded Date -->
+            <ng-container matColumnDef="recordedDate">
+              <th mat-header-cell *matHeaderCellDef>Recorded Date</th>
+              <td mat-cell *matCellDef="let cond">
+                {{ cond.recordedDate ? (cond.recordedDate | date: 'medium') : 'N/A' }}
+              </td>
+            </ng-container>
+
+            <!-- Clinical Status -->
+            <ng-container matColumnDef="clinicalStatus">
+              <th mat-header-cell *matHeaderCellDef>Clinical Status</th>
+              <td mat-cell *matCellDef="let cond">{{ cond.clinicalStatus?.text || 'N/A' }}</td>
+            </ng-container>
+
+            <!-- Verification Status -->
+            <ng-container matColumnDef="verificationStatus">
+              <th mat-header-cell *matHeaderCellDef>Verification</th>
+              <td mat-cell *matCellDef="let cond">{{ cond.verificationStatus?.text || 'N/A' }}</td>
+            </ng-container>
+
+            <!-- Severity -->
+            <ng-container matColumnDef="severity">
+              <th mat-header-cell *matHeaderCellDef>Severity</th>
+              <td mat-cell *matCellDef="let cond">{{ cond.severity?.text || 'N/A' }}</td>
+            </ng-container>
+
+             <!-- Subject -->
+             <ng-container matColumnDef="practitioner">
+              <th mat-header-cell *matHeaderCellDef>Practitioner</th>
+              <td mat-cell *matCellDef="let cond">{{ cond.participant?.[0].function.text || 'N/A' }}</td>
+            </ng-container>
+
+            <!-- Subject -->
+            <ng-container matColumnDef="subject">
+              <th mat-header-cell *matHeaderCellDef>Patient Ref</th>
+              <td mat-cell *matCellDef="let cond">{{ cond.participant?.[0].actor.reference || 'N/A' }}</td>
+            </ng-container>
+
+            <!-- Encounter -->
+            <ng-container matColumnDef="encounter">
+              <th mat-header-cell *matHeaderCellDef>Encounter</th>
+              <td mat-cell *matCellDef="let cond">{{ cond.encounter?.reference || 'N/A' }}</td>
+            </ng-container>
+
+            <!-- Identifier -->
+            <ng-container matColumnDef="identifier">
+              <th mat-header-cell *matHeaderCellDef>Identifier</th>
+              <td mat-cell *matCellDef="let cond">{{ cond.identifier?.[0]?.value || 'N/A' }}</td>
+            </ng-container>
+
+            <!-- Last Updated -->
+            <ng-container matColumnDef="lastUpdated">
+              <th mat-header-cell *matHeaderCellDef>Last Updated</th>
+              <td mat-cell *matCellDef="let cond">{{ cond.lastUpdated ? (cond.lastUpdated | date: 'medium') : 'N/A' }}</td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          </table>
+        </mat-card-content>
+      </mat-card>
+    </div>
+
+    <ng-template #noData>
+      <p>No conditions available.</p>
+    </ng-template>
+  </mat-sidenav-content>
+</mat-sidenav-container>

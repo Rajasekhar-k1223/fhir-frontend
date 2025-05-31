@@ -4,11 +4,38 @@
   [center]="center"
   [zoom]="zoom">
 
+  <!-- Practitioner markers - Red icon -->
   <map-marker
-    *ngFor="let marker of markers"
+    *ngFor="let marker of Practitionermarkers"
     [position]="marker.position"
-    [label]="marker.label"
-    [title]="marker.title">
+    [icon]="{ url: 'http://maps.google.com/mapfiles/ms/icons/red-dot.png' }"
+    [title]="marker.label">
   </map-marker>
+  <map-marker
+    *ngFor="let marker of Patientmarkers"
+    [position]="marker.position"
+    [icon]="{ url: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png' }"
+    [title]="marker.label">
+  </map-marker>
+  <!-- <map-marker
+    *ngFor="let marker of Patientmarkers"
+    [position]="marker.position"
+    [icon]="{ url: 'http://maps.google.com/mapfiles/ms/icons/black-dot.png' }"
+    [title]="marker.label">
+  </map-marker>
+  <map-marker
+    *ngFor="let marker of Patientmarkers"
+    [position]="marker.position"
+    [icon]="{ url: 'http://maps.google.com/mapfiles/ms/icons/black-dot.png' }"
+    [title]="marker.label">
+  </map-marker> -->
+
+  <!-- Patient markers - Black icon -->
+  <!-- <map-marker
+    *ngFor="let markerp of Patientmarkers"
+    [position]="markerp.position"
+    [icon]="{ url: 'http://maps.google.com/mapfiles/ms/icons/black-dot.png' }"
+    [title]="markerp.label">
+  </map-marker> -->
 
 </google-map>

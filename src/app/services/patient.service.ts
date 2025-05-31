@@ -7,19 +7,26 @@ import { PatientEncounter } from '../components/patient-encounter/patient-encoun
   providedIn: 'root'
 })
 export class PatientService {
-  private apiUrl = 'http://localhost:5059/api/';
+  // private apiUrl = 'http://localhost:5059/api/';
+  private apiUrl = 'http://127.0.0.1:8000/api/';
 
   constructor(private http: HttpClient) { }
 
   // Fetch all patients
   getPatients(): Observable<any> {
-    return this.http.get<any>(this.apiUrl+"Patients", { headers: { 'Accept': 'application/json' } });
+    return this.http.get<any>(this.apiUrl+"patients", { headers: { 'Accept': 'application/json' } });
+  }
+   getPatientsDashboard(): Observable<any> {
+    return this.http.get<any>(this.apiUrl+"Patients/Dashboard", { headers: { 'Accept': 'application/json' } });
+  }
+  getPatientsMaps(page: number, pageSize: number): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}Patients/map-markers?page=${page}&pageSize=${pageSize}`);
   }
 
   // Fetch patient details by identifier
   fetchPatientDetails(identifier: string): Observable<any> {
     // const url = `${this.apiUrl}/searchById?patientId=${identifier}`;
-    const url = `${this.apiUrl}Patients/${identifier}`;
+    const url = `${this.apiUrl}patient/${identifier}`;
     return this.http.get<any>(url, { headers: { 'Accept': 'application/json' } });
   }
   fetchPatientEncounters(id: string): Observable<any> {

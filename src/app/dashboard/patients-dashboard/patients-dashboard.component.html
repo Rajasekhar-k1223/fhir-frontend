@@ -1,0 +1,103 @@
+<div class="mat-typography" style="height: 92.5vh; display: flex; flex-direction: row; overflow: hidden;">
+
+  <!-- Main Dashboard Section -->
+  <div style="flex: 3; padding: 16px; overflow-y: auto;">
+
+    <h1 class="mat-headline">FHIR Super Admin Patient Dashboard</h1>
+
+    <!-- Summary Cards -->
+    <div class="dashboard-cards" style="display: flex; gap: 16px; flex-wrap: wrap;">
+      <mat-card *ngFor="let item of dataSummary" class="summary-card mat-elevation-z4" style="flex: 1 1 200px;padding: 0.5rem 1rem;">
+  <mat-card-title>
+    <!-- Show different titles based on type -->
+    <ng-container *ngIf="item.type === 'total'; else genderTitle">
+      Total Patients
+    </ng-container>
+    <ng-template #genderTitle>{{ item.name }}</ng-template>
+  </mat-card-title>
+
+  <mat-card-content>
+    <h2>{{ item.count | number }}</h2>
+    <!-- You can show additional info if it's a gender section -->
+    <div *ngIf="item.type !== 'total'">
+      <!-- Add any gender-specific content here -->
+      Gender: {{ item.name }}
+    </div>
+  </mat-card-content>
+</mat-card>
+
+    </div>
+
+    <!-- Charts -->
+    <div class="charts" style="display: flex; gap: 16px; margin-top: 24px;">
+      <div class="chart" style="flex: 1;">
+        <h2>Patients Count by Cities</h2>
+        <canvas baseChart [data]="pieChartOptions.data" [type]="pieChartOptions.type" [options]="pieChartOptions.options"></canvas>
+      </div>
+      <div style="width: 700px; height: 400px;">
+  <canvas baseChart
+    [data]="barChartOptions.data"
+    [options]="barChartOptions.options"
+    [type]="barChartOptions.type">
+  </canvas>
+</div>
+    </div>
+
+    <!-- Table -->
+    <mat-card class="mat-elevation-z2" style="margin-top: 24px;">
+      <mat-card-title>Patient Details</mat-card-title>
+      <mat-card-content>
+        <table mat-table [dataSource]="patients" class="mat-elevation-z1" style="width: 100%;">
+          <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef>Name</th>
+            <td mat-cell *matCellDef="let p">{{p.name?.[0]?.text}}</td>
+          </ng-container>
+          <ng-container matColumnDef="gender">
+            <th mat-header-cell *matHeaderCellDef>Gender</th>
+            <td mat-cell *matCellDef="let p">{{p.gender}}</td>
+          </ng-container>
+          <ng-container matColumnDef="dob">
+            <th mat-header-cell *matHeaderCellDef>Date of Birth</th>
+            <td mat-cell *matCellDef="let p">{{p.birthDate}}</td>
+          </ng-container>
+          <ng-container matColumnDef="city">
+            <th mat-header-cell *matHeaderCellDef>City</th>
+            <td mat-cell *matCellDef="let p">{{p.address?.[0]?.city}}</td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="['name', 'gender', 'dob', 'city']"></tr>
+          <tr mat-row *matRowDef="let row; columns: ['name', 'gender', 'dob', 'city'];"></tr>
+        </table>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <!-- Sidebar for Logs and Recent Updates -->
+  <div style="flex: 1; max-width: 400px; height: 92.5vh; overflow-y: auto; background-color: #f5f7fa; padding: 16px; display: flex; flex-direction: column; gap: 24px;">
+
+    <!-- Logs -->
+    <mat-card class="mat-elevation-z5">
+      <mat-card-title>🔍 Patient Logs</mat-card-title>
+      <mat-divider></mat-divider>
+      <mat-card-content style="display: grid; gap: 12px; margin-top: 1rem; max-height: 325px; overflow-y: auto;">
+        <div *ngFor="let log of logs" style="padding: 12px; background-color: #ffffff; border-left: 4px solid #3f51b5; border-radius: 6px;">
+          <div style="font-weight: 600; color: #333;">{{ log.timestamp | date:'short' }}</div>
+          <div style="color: #555;">{{ log.message }}</div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <!-- Updates -->
+    <mat-card class="mat-elevation-z5">
+      <mat-card-title>📢 Portal Activity</mat-card-title>
+      <mat-divider></mat-divider>
+      <mat-card-content style="display: grid; gap: 12px; margin-top: 1rem; max-height: 325px; overflow-y: auto;">
+        <div *ngFor="let update of recentUpdates" style="padding: 12px; background-color: #e3f2fd; border-left: 4px solid #2196f3; border-radius: 6px;">
+          <div style="font-weight: 600; color: #0d47a1;">{{ update.type }} - {{ update.timestamp | date:'short' }}</div>
+          <div style="color: #333;">{{ update.description }}</div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+  </div>
+</div>

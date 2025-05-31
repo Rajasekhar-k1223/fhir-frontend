@@ -6,6 +6,9 @@
 }
 
 .location-card {
-  width: 300px;
+  width: 358.5px;
   margin: 8px;
+}
+.location-card:hover {
+  box-shadow: 0px 0px 5px #000;
 }

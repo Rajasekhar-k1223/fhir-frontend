@@ -67,7 +67,7 @@ export class PatientComponent implements OnInit {
             console.log(patientD)
           })
           this.patientDetails = response.data.map((patientData:any) => ({
-            patientId: patientData.id || '',
+            patientId: patientData.identifier[0].value || '',
             fullName: this.extractFullName(patientData),
             // mrn: this.extractMRN(patientData),
             mrn:patientData.identifier[0].value,
@@ -104,7 +104,7 @@ export class PatientComponent implements OnInit {
 
     return '';
   }
-  ;extractMRN(patientData: any): string {
+  extractMRN(patientData: any): string {
     if (Array.isArray(patientData?.identifier) && patientData.identifier.length > 0) {
       const mrnIdentifier = patientData.identifier.find(
         (idObj: { system?: string | null; value?: string }) => idObj.system === 'MR' || idObj.system === null

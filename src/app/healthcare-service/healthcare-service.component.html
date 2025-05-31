@@ -1,1 +1,60 @@
-<p>healthcare-service works!</p>
+<!-- <div class="card-grid">
+  <mat-card *ngFor="let service of healthcareServices; let i = index" class="mat-elevation-z3 service-card">
+    <mat-card-title>{{ service.name || 'Unnamed Healthcare Service' }}</mat-card-title>
+    <mat-card-content>
+      <p><strong>Category:</strong> {{ service.category?.[0]?.coding?.[0]?.display || 'N/A' }}</p>
+      <p><strong>Provided By:</strong> {{ service.providedBy?.reference || 'N/A' }}</p>
+
+
+      <p *ngIf="service.availability?.length">
+        <strong>Availability:</strong>
+        <span *ngFor="let avail of service.availability">
+          {{ avail.daysOfWeek?.join(', ') || 'Days not specified' }}:
+          {{ avail.availableStartTime || 'N/A' }} - {{ avail.availableEndTime || 'N/A' }}
+        </span>
+      </p>
+
+      <button mat-button (click)="toggleDetails(i)">
+        {{ visibleDetailIndex === i ? 'Hide Details' : 'View Details' }}
+      </button>
+
+      <div *ngIf="visibleDetailIndex === i">
+        <mat-divider></mat-divider>
+        <p><strong>Specialty:</strong> {{ service.specialty?.[0]?.coding?.[0]?.display || 'N/A' }}</p>
+        <p><strong>Address:</strong> {{ service.contact?.[0]?.address?.text || 'N/A' }}</p>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div> -->
+
+<div class="card-grid" #isotopeContainer>
+  <mat-card
+    *ngFor="let service of healthcareServices; let i = index"
+    class="mat-elevation-z3 service-card grid-item"
+  >
+    <mat-card-title>{{ service.name || 'Unnamed Healthcare Service' }}</mat-card-title>
+    <mat-card-content>
+      <p><strong>Category:</strong> {{ service.category?.[0]?.coding?.[0]?.display || 'N/A' }}</p>
+      <p><strong>Provided By:</strong> {{ service.providedBy?.reference || 'N/A' }}</p>
+
+      <!-- Availability -->
+      <p *ngIf="service.availability?.length">
+        <strong>Availability:</strong>
+        <span *ngFor="let avail of service.availability">
+          {{ avail.daysOfWeek?.join(', ') || 'Days not specified' }}:
+          {{ avail.availableStartTime || 'N/A' }} - {{ avail.availableEndTime || 'N/A' }}
+        </span>
+      </p>
+
+      <button mat-button (click)="toggleDetails(i)">
+        {{ visibleDetailIndex === i ? 'Hide Details' : 'View Details' }}
+      </button>
+
+      <div *ngIf="visibleDetailIndex === i">
+        <mat-divider></mat-divider>
+        <p><strong>Specialty:</strong> {{ service.specialty?.[0]?.coding?.[0]?.display || 'N/A' }}</p>
+        <p><strong>Address:</strong> {{ service.contact?.[0]?.address?.text || 'N/A' }}</p>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>

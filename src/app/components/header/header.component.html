@@ -1,6 +1,8 @@
-<mat-toolbar color="primary" class="app-header"  *ngIf="isLoggedIn">
-  <span class="logo">MyApp</span>
+<mat-toolbar color="primary" class="app-header" *ngIf="isLoggedIn">
+  <!-- App Logo -->
+  <img src="assets/logo.jpg" alt="App Logo" class="app-logo" style="width: 50px;border-radius: 5px;" />
 
+  <span class="logo"><img src="assets/HC-Logo.png" alt="App Logo" class="app-logo" style="width: 90px;border-radius: 5px;margin-top: 18px;" /></span>
   <span class="spacer"></span>
 
   <!-- Navigation Menu -->
@@ -58,7 +60,7 @@
     routerLink="/geomaps"
     [class.active-link]="activeRoute === 'geomaps'"
   >
-   GeoMaps
+    GeoMaps
   </button>
 
   <span class="spacer"></span>
@@ -76,8 +78,11 @@
     </mat-menu>
   </ng-container>
 </mat-toolbar>
-<mat-toolbar color="primary" class="app-header" *ngIf="!isLoggedIn" >
-<button mat-raised-button color="accent" class="login-btn" (click)="toggleLogin()">Login</button>
+
+<mat-toolbar color="primary" class="app-header" *ngIf="!isLoggedIn">
+  <img src="assets/logo.jpg" alt="App Logo" class="app-logo" style="width: 50px;border-radius: 5px;" />
+
+  <span class="logo"><img src="assets/HC-Logo.png" alt="App Logo" class="app-logo" style="width: 90px;border-radius: 5px;margin-top: 18px;" /></span>
+  <span class="spacer"></span>
+  <button mat-raised-button color="accent" class="login-btn" (click)="toggleLogin()">Login</button>
 </mat-toolbar>
-
-

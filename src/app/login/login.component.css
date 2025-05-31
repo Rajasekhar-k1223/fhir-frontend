@@ -1,0 +1,85 @@
+.login-card {
+  width: 400px;
+  margin: 100px auto;
+  padding: 20px;
+  text-align: center;
+}
+
+.full-width {
+  width: 100%;
+  margin-bottom: 16px;
+}
+.login-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 92.4vh;
+  padding: 20px;
+  overflow-y: hidden;
+  /* background-color: #fff; */
+  background: url('../../assets/login_page.jpg');
+  background-size: 100% 150%;
+  /* background-repeat: no-repeat; */
+  /* background-size: auto; */
+
+}
+
+.image-container {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.image-container img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+.login-card {
+  flex: 1;
+  max-width: 400px;
+  margin-left: auto;
+  padding: 20px;
+  height: 35vh;
+  background-color: #fff;
+}
+/* Medium screens (tablets) */
+@media screen and (max-width: 1024px) {
+  .login-container {
+    flex-direction: column;
+  }
+
+  /* .image-container {
+    width: 100%;
+    text-align: center;
+  } */
+  .image-container {
+    display: none; /* hide image on very small screens */
+  }
+
+  .login-card {
+    max-width: 100%;
+  }
+}
+
+/* Small screens (phones) */
+@media screen and (max-width: 600px) {
+  .login-container {
+    padding: 1rem;
+  }
+
+  .login-card {
+    padding: 1.5rem 1rem;
+  }
+
+  .image-container {
+    display: none; /* hide image on very small screens */
+  }
+
+  h2 {
+    font-size: 1.5rem;
+    text-align: center;
+  }
+}

@@ -1,0 +1,86 @@
+<div class="mat-typography" style="height: 92.5vh; display: flex; flex-direction: row; overflow: hidden;">
+
+  <!-- Main Dashboard Section -->
+  <div style="flex: 3; padding: 16px; overflow-y: auto;">
+
+    <h1 class="mat-headline">FHIR Super Admin Dashboard</h1>
+
+    <!-- Summary Cards -->
+    <div class="dashboard-cards" style="display: flex; gap: 16px; flex-wrap: wrap;">
+      <mat-card
+  *ngFor="let item of dataSummary"
+  class="summary-card mat-elevation-z4"
+  style="flex: 1 1 200px; cursor: pointer;"
+  (click)="navigateTo(item.name)">
+  <mat-card-title>{{ item.name }}</mat-card-title>
+  <mat-card-content>
+    <h2>{{ item.count | number }}</h2>
+  </mat-card-content>
+</mat-card>
+
+    </div>
+
+    <!-- Charts -->
+    <div class="charts" style="display: flex; gap: 16px; margin-top: 24px;">
+      <div class="chart" style="flex: 1;">
+        <h2>Document Distribution</h2>
+        <canvas baseChart [data]="pieChartOptions.data" [type]="pieChartOptions.type" [options]="pieChartOptions.options"></canvas>
+      </div>
+      <div class="chart" style="flex: 1;">
+        <h2>Top Collections by Count</h2>
+        <canvas baseChart [data]="barChartOptions.data" [type]="barChartOptions.type" [options]="barChartOptions.options"></canvas>
+      </div>
+    </div>
+
+    <!-- Table -->
+    <mat-card class="mat-elevation-z2" style="margin-top: 24px;">
+      <mat-card-title>FHIR Collections Table</mat-card-title>
+      <mat-card-content>
+        <table mat-table [dataSource]="dataSummary" class="mat-elevation-z1" style="width: 100%;">
+          <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef>Name</th>
+            <td mat-cell *matCellDef="let element">{{element.name}}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="count">
+            <th mat-header-cell *matHeaderCellDef>Document Count</th>
+            <td mat-cell *matCellDef="let element">{{element.count | number}}</td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="['name', 'count']"></tr>
+          <tr mat-row *matRowDef="let row; columns: ['name', 'count'];"></tr>
+        </table>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <!-- Sidebar for Logs and Recent Updates -->
+  <div style="flex: 1; max-width: 400px; height: 92.5vh; overflow-y: auto; background-color: #f5f7fa; padding: 16px; display: flex; flex-direction: column; gap: 24px;">
+
+   <!-- Logs -->
+<mat-card class="mat-elevation-z5">
+  <mat-card-title>🔍 System Logs</mat-card-title>
+  <mat-divider></mat-divider>
+  <mat-card-content style="display: grid; grid-template-columns: 1fr; gap: 12px;margin-top: 1rem; max-height: 325px; overflow-y: auto;">
+    <div *ngFor="let log of logs" style="padding: 12px; background-color: #ffffff; border-left: 4px solid #3f51b5; border-radius: 6px;">
+      <div style="font-weight: 600; color: #333;">{{ log.timestamp | date:'short' }}</div>
+      <div style="color: #555;">{{ log.message }}</div>
+    </div>
+  </mat-card-content>
+</mat-card>
+
+<!-- Recent Portal Updates -->
+<mat-card class="mat-elevation-z5">
+  <mat-card-title>📢 Portal Activity</mat-card-title>
+  <mat-divider></mat-divider>
+  <mat-card-content style="display: grid; grid-template-columns: 1fr; gap: 12px;margin-top: 1rem; max-height: 325px; overflow-y: auto;">
+    <div *ngFor="let update of recentUpdates" style="padding: 12px; background-color: #e3f2fd; border-left: 4px solid #2196f3; border-radius: 6px;">
+      <div style="font-weight: 600; color: #0d47a1;">{{ update.type }} - {{ update.timestamp | date:'short' }}</div>
+      <div style="color: #333;">{{ update.description }}</div>
+    </div>
+  </mat-card-content>
+</mat-card>
+
+
+  </div>
+</div>

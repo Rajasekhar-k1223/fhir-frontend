@@ -1,6 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 
-html, body { height: 100%; }
+/* html, body { height: 100%; } */
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .app-header {
   position: fixed;
@@ -13,8 +13,8 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 /* Ensure the content does not go under the header */
 .page-content {
-  margin-top: 70px; /* Adjust based on your toolbar height */
-  min-height: calc(100vh - 70px); /* Ensure it takes the full remaining height */
+  margin-top: 65px; /* Adjust based on your toolbar height */
+  min-height: calc(100vh - 70px);
   box-sizing: border-box;
 }
 mat-cell.long-text {

@@ -50,22 +50,22 @@ export class PatientDetailsComponent implements OnInit {
         console.log("data.patient",data)
         if (data) {
           console.log("patient DEtails ",data)
-          const patient = data; // Assuming single patient data from response
-
+          const patient = data.data; // Assuming single patient data from response
+          console.log(patient)
           this.patientDetails = {
             // id: patient.patientId || 'N/A', // Direct string access
-            fullName: `${patient.name[0].text || ''} ${patient.name?.[0]?.given || ''}`.trim(), // Corrected name extraction
+            fullName: `${patient.name?.[0].text || ''} ${patient.name?.[0]?.given || ''}`.trim(), // Corrected name extraction
             identifier: patient.identifier?.[0]?.value || 'N/A', // Directly extract identifier value
             // lastUpdated: patient.meta?.lastUpdated || 'N/A', // No need for `.value`
             active:patient.active,
-            address:patient.address[0],
+            address:patient.address?.[0].text,
             birthdate:patient.birthDate,
             gender:patient.gender,
-            marriedStatus:patient.maritalStatus.text,
-            photo:patient.photo[0].url,
-            telcom:patient.telecom[0],
-            contact:patient.contact[0],
-            generalPrac:patient.generalPractitioner[0],
+            marriedStatus:patient.maritalStatus?.text,
+            photo:patient.photo?.[0].url,
+            telcom:patient.telecom?.[0],
+            contact:patient.contact?.[0],
+            generalPrac:patient.generalPractitioner?.[0],
             s:patient.managingOrganization,
             lastUpdate:patient.lastUpdated
 

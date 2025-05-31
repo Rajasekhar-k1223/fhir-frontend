@@ -1,1 +1,92 @@
-<p>organization works!</p>
+<!-- <div *ngIf="organization?.length > 0" #isotopeContainer class="org-grid">
+  <div *ngFor="let org of organization; let i = index" class="org-card grid-item">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>{{ org.name }}</mat-card-title>
+        <mat-card-subtitle><strong>Type:</strong> {{ org.type[0]?.text }}</mat-card-subtitle>
+      </mat-card-header>
+
+      <mat-card-content>
+        <div class="org-details">
+          <p><strong>Description:</strong> {{ org.description }}</p>
+
+          <div *ngIf="org.identifier?.length">
+            <p><strong>Identifier:</strong> {{ org.identifier[0]?.value }}</p>
+          </div>
+
+          <div *ngIf="org.qualification?.length">
+            <p><strong>Qualification:</strong> {{ org.qualification[0]?.code?.text }}</p>
+            <p><strong>Valid From:</strong> {{ org.qualification[0]?.period?.start | date: 'longDate' }}</p>
+            <p><strong>Valid Until:</strong> {{ org.qualification[0]?.period?.end | date: 'longDate' }}</p>
+          </div>
+
+          <div *ngIf="visibleContactIndex === i && org.contact?.length">
+            <h3>Contacts:</h3>
+            <div *ngFor="let contact of org.contact" class="contact-section">
+              <mat-divider></mat-divider>
+              <p><strong>Name:</strong> {{ contact.name?.text }}</p>
+              <p><strong>Phone:</strong> {{ contact.telecom[0]?.value }}</p>
+              <p><strong>Address:</strong> {{ contact.address?.text }}</p>
+              <p><strong>City:</strong> {{ contact.address?.city }}</p>
+              <p><strong>State:</strong> {{ contact.address?.state }}</p>
+              <p><strong>Postal Code:</strong> {{ contact.address?.postalCode }}</p>
+              <p><strong>Country:</strong> {{ contact.address?.country }}</p>
+            </div>
+          </div>
+        </div>
+      </mat-card-content>
+
+      <mat-card-actions>
+        <button mat-button color="primary" (click)="toggleContact(i)">
+          {{ visibleContactIndex === i ? 'Hide' : 'View' }} Contacts
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div> -->
+<div #isotopeContainer class="org-grid">
+  <div *ngFor="let org of organization; let i = index" class="org-card grid-item">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>{{ org.name }}</mat-card-title>
+        <mat-card-subtitle><strong>Type:</strong> {{ org.type[0]?.text }}</mat-card-subtitle>
+      </mat-card-header>
+
+      <mat-card-content>
+        <div class="org-details">
+          <p><strong>Description:</strong> {{ org.description }}</p>
+
+          <div *ngIf="org.identifier?.length">
+            <p><strong>Identifier:</strong> {{ org.identifier[0]?.value }}</p>
+          </div>
+
+          <div *ngIf="org.qualification?.length">
+            <p><strong>Qualification:</strong> {{ org.qualification[0]?.code?.text }}</p>
+            <p><strong>Valid From:</strong> {{ org.qualification[0]?.period?.start | date: 'longDate' }}</p>
+            <p><strong>Valid Until:</strong> {{ org.qualification[0]?.period?.end | date: 'longDate' }}</p>
+          </div>
+
+          <div *ngIf="visibleContactIndex === i && org.contact?.length">
+            <h3>Contacts:</h3>
+            <div *ngFor="let contact of org.contact" class="contact-section">
+              <mat-divider></mat-divider>
+              <p><strong>Name:</strong> {{ contact.name?.text }}</p>
+              <p><strong>Phone:</strong> {{ contact.telecom[0]?.value }}</p>
+              <p><strong>Address:</strong> {{ contact.address?.text }}</p>
+              <p><strong>City:</strong> {{ contact.address?.city }}</p>
+              <p><strong>State:</strong> {{ contact.address?.state }}</p>
+              <p><strong>Postal Code:</strong> {{ contact.address?.postalCode }}</p>
+              <p><strong>Country:</strong> {{ contact.address?.country }}</p>
+            </div>
+          </div>
+        </div>
+      </mat-card-content>
+
+      <mat-card-actions>
+        <button mat-button color="primary" (click)="toggleContact(i)">
+          {{ visibleContactIndex === i ? 'Hide' : 'View' }} Contacts
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div>

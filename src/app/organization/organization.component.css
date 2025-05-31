@@ -1,0 +1,70 @@
+/* .org-grid { */
+  /* display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); */
+  /* gap: 8px;
+  padding: 16px; */
+/* } */
+
+/* .org-card {
+  display: flex;
+  flex-direction: column;
+} */
+
+.contact-section {
+  margin-top: 10px;
+  padding-left: 10px;
+  border-left: 3px solid #2196F3;
+}
+
+/* .org-grid {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 auto;
+} */
+/* .org-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  gap: 8px;
+  padding: 16px;
+
+} */
+/* .org-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  gap: 8px;
+  padding: 16px;
+  width: 100%;
+  box-sizing: border-box;
+}
+.grid-item {
+  width: 100%;
+  max-width: 400px;
+  min-height: 200px; */
+  /* width: 100%;
+  max-width: 400px; */
+  /* margin-bottom: 20px; */
+/* } */
+.org-grid {
+  position: relative;
+  width: 100%;
+  padding: 16px;
+  box-sizing: border-box;
+}
+
+.grid-item {
+  /* width: 100%;
+  max-width: 400px;
+  margin-bottom: 10px;  */
+  width: 300px; /* fixed width for masonry layout */
+  margin-bottom: 10px;
+}
+
+.grid-item:hover {
+box-shadow: 0px 0px 5px #000;
+}

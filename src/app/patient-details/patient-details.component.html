@@ -35,8 +35,15 @@
           <p><strong>Date of Birth:</strong> {{ patientDetails.birthdate }}</p>
           <p><strong>Gender:</strong> {{ patientDetails.gender }}</p>
           <p><strong>Marital Status:</strong> {{ patientDetails.marriedStatus }}</p>
-          <p><strong>Contact:</strong> {{ patientDetails.telcom }}</p>
-          <p><strong>Emergency Contact:</strong> {{ patientDetails.contact }}</p>
+          <p><strong>Contact:</strong> {{ patientDetails.telcom.value }} <span>({{ patientDetails.telcom.use }} {{ patientDetails.telcom.system }})</span></p>
+          <p><strong>Address:</strong> {{ patientDetails.address }}</p>
+          <p><strong>Emergency Contact:</strong> <span><ul>
+            <li>{{ patientDetails.contact.name.text }}</li>
+            <li>{{ patientDetails.contact.gender}}</li>
+            <li>{{ patientDetails.contact.address.text}}</li><li>{{ patientDetails.contact.name.text }}</li>
+            <li>{{ patientDetails.contact.name.text }}</li>
+            <li>{{ patientDetails.contact.name.text }}</li>
+          </ul></span></p>
           <p><strong>General Practitioner:</strong> {{ patientDetails.generalPrac }}</p>
           <p><strong>Managing Organization:</strong> {{ patientDetails.mangOrganization }}</p>
           <p><strong>Status:</strong> {{ patientDetails.active ? 'Active' : 'Inactive' }}</p>

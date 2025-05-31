@@ -18,7 +18,8 @@
     <mat-nav-list>
       <a mat-list-item *ngFor="let item of patientMenuItems"
          [routerLink]="item.link"
-         routerLinkActive="active">
+         routerLinkActive="active"
+         class="sidebar-link">
         {{ item.name }}
       </a>
       <a mat-list-item *ngFor="let item of practitionerMenuItems"

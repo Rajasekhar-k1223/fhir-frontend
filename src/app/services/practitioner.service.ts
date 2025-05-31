@@ -15,6 +15,9 @@ export class PractitionerService {
     return this.http.get<any>(`${this.apiUrl}?page=${page}&pageSize=${pageSize}`);
   }
 
+  getPractitionersMaps(page: number, pageSize: number): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/map-markers?page=${page}&pageSize=${pageSize}`);
+  }
 
   fetchPractitionerDetails(identifier: string): Observable<any> {
     // const url = `${this.apiUrl}/searchById?patientId=${identifier}`;

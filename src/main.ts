@@ -42,12 +42,18 @@ import { OrganizationComponent } from './app/organization/organization.component
 import { LocationComponent } from './app/location/location.component';
 import { HealthcareServiceComponent } from './app/healthcare-service/healthcare-service.component';
 import { GeomapsComponent } from './app/geomaps/geomaps.component';
+import { LoginComponent } from './app/login/login.component';
+import { SuperAdminComponent } from './app/dashboard/super-admin/super-admin.component';
+import { PatientsDashboardComponent } from './app/dashboard/patients-dashboard/patients-dashboard.component';
 
 
 bootstrapApplication(AppComponent, {
   providers: [
     provideHttpClient(),
     provideRouter([
+      { path: 'login', component: LoginComponent },
+      { path: 'superadmin',component:SuperAdminComponent },
+      { path: 'patient-dashboard',component:PatientsDashboardComponent },
       { path: '', redirectTo: 'patient', pathMatch: 'full' }, // ✅ No leading slash
       { path: 'patient', component: PatientComponent }, // ✅ No leading slash
       { path: 'practitioner', component: PractitionerComponent }, // ✅ No leading slash

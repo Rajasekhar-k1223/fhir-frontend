@@ -7,6 +7,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { PLATFORM_ID } from '@angular/core';
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-header',
@@ -22,10 +23,11 @@ export class HeaderComponent {
   private platformId = inject(PLATFORM_ID);
 
   constructor(private router: Router) {
-    this.router.events.subscribe(event => {
-      if (event instanceof NavigationEnd) {
-        this.activeRoute = event.urlAfterRedirects.split('/')[1];
-      }
+    this.router.events
+    .pipe(filter((event) => event instanceof NavigationEnd))
+    .subscribe((event: any) => {
+      // Grab last part of the route after "/"
+      this.activeRoute = event.urlAfterRedirects.split('/').pop() || '';
     });
 
     this.checkLoginStatus();
@@ -45,8 +47,12 @@ export class HeaderComponent {
     if (isPlatformBrowser(this.platformId)) { // ✅ Prevents `localStorage` errors
       if (this.isLoggedIn) {
         localStorage.removeItem('user'); // Logout
+        this.checkLoginStatus();
+        this.router.navigate(['/login']); // ✅ Redirect after logout
       } else {
         localStorage.setItem('user', JSON.stringify({ name: 'John Doe' })); // Simulate login
+        this.checkLoginStatus();
+        this.router.navigate(['/']);
       }
       this.checkLoginStatus();
     }

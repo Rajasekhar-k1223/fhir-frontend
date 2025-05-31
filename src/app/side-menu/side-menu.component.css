@@ -23,3 +23,10 @@
   font-size: 18px;
   font-weight: bold;
 }
+
+::ng-deep a.sidebar-link.active .mdc-list-item__primary-text {
+  color: white !important;
+  font-weight: bold;
+}
+
+

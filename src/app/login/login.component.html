@@ -8,7 +8,12 @@
     <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
       <mat-form-field appearance="fill" class="full-width">
         <mat-label>Username</mat-label>
-        <input matInput formControlName="username" required />
+          <input
+        matInput
+        placeholder="Enter your identifier"
+        formControlName="identifier"
+        required
+      />
       </mat-form-field>
 
       <mat-form-field appearance="fill" class="full-width">

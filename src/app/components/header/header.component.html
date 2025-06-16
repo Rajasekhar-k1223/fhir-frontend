@@ -72,7 +72,7 @@
     </button>
     <mat-menu #userMenu="matMenu">
       <button mat-menu-item disabled>Welcome, {{ userName }}</button>
-      <button mat-menu-item (click)="toggleLogin()">
+      <button mat-menu-item (click)="logOut()">
         <mat-icon>logout</mat-icon> Logout
       </button>
     </mat-menu>
@@ -84,5 +84,5 @@
 
   <span class="logo"><img src="assets/HC-Logo.png" alt="App Logo" class="app-logo" style="width: 90px;border-radius: 5px;margin-top: 18px;" /></span>
   <span class="spacer"></span>
-  <button mat-raised-button color="accent" class="login-btn" (click)="toggleLogin()">Login</button>
+  <!-- <button mat-raised-button color="accent" class="login-btn" (click)="toggleLogin()">Login</button> -->
 </mat-toolbar>

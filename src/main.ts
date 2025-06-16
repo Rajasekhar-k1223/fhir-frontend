@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { authGuard } from './app/auth.guard';
 import { CareteamComponent } from './app/careteam/careteam.component';
 import { bootstrapApplication } from '@angular/platform-browser';
 import { AppComponent } from './app/app.component';
@@ -52,9 +53,10 @@ bootstrapApplication(AppComponent, {
     provideHttpClient(),
     provideRouter([
       { path: 'login', component: LoginComponent },
-      { path: 'superadmin',component:SuperAdminComponent },
+      { path: 'superadmin',component:SuperAdminComponent, canActivate: [authGuard],
+          data: { role: 'super-admin' } },
       { path: 'patient-dashboard',component:PatientsDashboardComponent },
-      { path: '', redirectTo: 'patient', pathMatch: 'full' }, // ✅ No leading slash
+      { path: '', redirectTo: 'login', pathMatch: 'full' }, // ✅ No leading slash
       { path: 'patient', component: PatientComponent }, // ✅ No leading slash
       { path: 'practitioner', component: PractitionerComponent }, // ✅ No leading slash
       { path: 'patient-details/:id', component: PatientDetailsComponent }, // Patient details route

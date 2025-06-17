@@ -75,6 +75,9 @@ export class LoginComponent {
           case 'super-admin':
             this.router.navigate(['/superadmin']);
             break;
+          case 'admin':
+            this.router.navigate(['/organizationDashboard']);
+            break;
           case 'patient':
             this.router.navigate(['/patient-dashboard']);
             break;

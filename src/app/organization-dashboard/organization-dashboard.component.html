@@ -1,0 +1,39 @@
+<mat-toolbar color="primary" class="toolbar">
+  🏥 Organization Dashboard
+</mat-toolbar>
+
+<div class="section">
+  <h2>Clinical Departments</h2>
+  <ngx-masonry>
+    <div ngxMasonryItem *ngFor="let dept of clinicalDepartments" class="masonry-tile">
+      <mat-card class="dashboard-card clinical">
+        <mat-icon class="dept-icon">{{ dept.icon }}</mat-icon>
+        <h3 class="dept-title">{{ dept.name }}</h3>
+      </mat-card>
+    </div>
+  </ngx-masonry>
+</div>
+
+<div class="section">
+  <h2>Diagnostic Departments</h2>
+  <ngx-masonry >
+    <div ngxMasonryItem *ngFor="let dept of diagnosticDepartments" class="masonry-tile">
+      <mat-card class="dashboard-card diagnostic">
+        <mat-icon class="dept-icon">{{ dept.icon }}</mat-icon>
+        <h3 class="dept-title">{{ dept.name }}</h3>
+      </mat-card>
+    </div>
+  </ngx-masonry>
+</div>
+
+<div class="section">
+  <h2>Administrative Departments</h2>
+  <ngx-masonry >
+    <div ngxMasonryItem *ngFor="let dept of administrativeDepartments" class="masonry-tile">
+      <mat-card class="dashboard-card administrative">
+        <mat-icon class="dept-icon">{{ dept.icon }}</mat-icon>
+        <h3 class="dept-title">{{ dept.name }}</h3>
+      </mat-card>
+    </div>
+  </ngx-masonry>
+</div>

@@ -46,6 +46,7 @@ import { GeomapsComponent } from './app/geomaps/geomaps.component';
 import { LoginComponent } from './app/login/login.component';
 import { SuperAdminComponent } from './app/dashboard/super-admin/super-admin.component';
 import { PatientsDashboardComponent } from './app/dashboard/patients-dashboard/patients-dashboard.component';
+import { OrganizationDashboardComponent } from './app/organization-dashboard/organization-dashboard.component';
 
 
 bootstrapApplication(AppComponent, {
@@ -55,10 +56,12 @@ bootstrapApplication(AppComponent, {
       { path: 'login', component: LoginComponent },
       { path: 'superadmin',component:SuperAdminComponent, canActivate: [authGuard],
           data: { role: 'super-admin' } },
-      { path: 'patient-dashboard',component:PatientsDashboardComponent },
+      { path: 'patient-dashboard',component:PatientsDashboardComponent, canActivate: [authGuard],
+          data: { role: 'super-admin' } },
       { path: '', redirectTo: 'login', pathMatch: 'full' }, // ✅ No leading slash
       { path: 'patient', component: PatientComponent }, // ✅ No leading slash
-      { path: 'practitioner', component: PractitionerComponent }, // ✅ No leading slash
+      { path: 'practitioner', component: PractitionerComponent, canActivate: [authGuard],
+          data: { role: 'doctor' }  }, // ✅ No leading slash
       { path: 'patient-details/:id', component: PatientDetailsComponent }, // Patient details route
       { path: 'patient-encounter/:id', component: PatientEncounterComponent }, // Encounter route
       { path: 'patient-observation/:id', component: PatientObservationComponent }, // Observation route
@@ -76,7 +79,7 @@ bootstrapApplication(AppComponent, {
       { path: 'patient-episode-of-care/:id', component: PatientEpisodeCareComponent }, // Episode Of Care route
       { path: 'patient-coverage/:id', component: PatientCoverageComponent }, // Coverage route
       { path: 'patient-related-person/:id', component: PatientRelatedPersonComponent }, // Related Person route
-      { path: 'practitioner-details/:id', component: PractitionerDetailsComponent }, // Practitioner details route
+      { path: 'practitioner-details/:id', component: PractitionerDetailsComponent}, // Practitioner details route
       { path: 'practitioner-encounter/:id', component: PractitionerEncounterComponent }, // Encounter (participant.individual)
       { path: 'practitioner-observation/:id', component: PractitionerObservationComponent }, // Observation (performer)
       { path: 'practitioner-procedure/:id', component: PractitionerProcedureComponent }, // Procedure (performer.actor)
@@ -91,7 +94,9 @@ bootstrapApplication(AppComponent, {
       { path: 'practitioner-task/:id', component: PractitionerTaskComponent }, // Task
       { path:'careteam',component:CareteamComponent },
       { path:'device',component:DeviceComponent },
-      { path:'organization',component:OrganizationComponent },
+      { path:'organization',component:OrganizationComponent},
+      { path:'organizationDashboard',component:OrganizationDashboardComponent, canActivate: [authGuard],
+          data: { role: 'admin' } },
       { path:'location',component:LocationComponent },
       { path:'healthcare-service',component:HealthcareServiceComponent },
       { path:'geomaps',component:GeomapsComponent }

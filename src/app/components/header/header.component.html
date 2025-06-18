@@ -9,14 +9,14 @@
   <button
     mat-button
     routerLink="/patient"
-    [class.active-link]="activeRoute === 'patient'"
+    [class.active-link]="activeRoute === 'patient'  || activeRoute === 'patientDashboard'"
   >
     Patients
   </button>
   <button
     mat-button
     routerLink="/practitioner"
-    [class.active-link]="activeRoute === 'practitioner'"
+    [class.active-link]="activeRoute === 'practitioner' || activeRoute === 'practitionerDashboard'"
   >
     Practitioners
   </button>

@@ -59,5 +59,7 @@ export class OrganizationDashboardComponent {
     { name: 'Facilities & Maintenance', icon: 'build_circle' },
     { name: 'Quality Assurance / NABH / JCI', icon: 'check_circle' },
     { name: 'Biomedical Engineering', icon: 'engineering' },
+    { name: 'All Patients', icon: 'groups' },
+    { name: 'All Doctors', icon: 'groups' },
   ];
 }
